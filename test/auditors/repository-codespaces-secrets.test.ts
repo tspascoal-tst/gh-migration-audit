@@ -24,7 +24,7 @@ describe('repositoryCodespacesSecrets', () => {
     expect(warnings).toEqual([
       {
         message:
-          'This repository has 4 GitHub Codespaces secrets, which will not be migrated',
+          'This repository has 2 GitHub Codespaces secrets, which will not be migrated',
       },
     ]);
   });
