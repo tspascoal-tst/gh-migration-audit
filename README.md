@@ -25,6 +25,8 @@ The results from audits with this tool are non-exhaustive - they won't identify 
 
 ## Installation 
 
+
+
 Make sure you've got the [GitHub CLI](https://cli.github.com/) installed. If you haven't, you can install it by following the instructions [here](https://github.com/cli/cli#installation).
 
 Once `gh` is ready and available on your machine, you can install this extension by running `gh extension install timrogers/gh-migration-audit`.
