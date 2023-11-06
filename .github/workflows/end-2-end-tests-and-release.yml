@@ -120,7 +120,6 @@ jobs:
     env:
       check_name: Integration Tests Windows
 
-
     steps:
       - name: Download Windows binary
         uses: dawidd6/action-download-artifact@268677152d06ba59fcec7a7f0b5d961b6ccd7e1e
