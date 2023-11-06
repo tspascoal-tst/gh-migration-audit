@@ -69,7 +69,7 @@ jobs:
         with:
           sha: ${{ steps.get-sha.outputs.sha }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          name: TODO
+          name: ${{ env.check_name }}
           conclusion: ${{ job.status }}
   
   end_to_end_tests_linux:
