@@ -54,7 +54,7 @@ jobs:
           name: macos-outputs
           path: output
       - name: get sha
-        id: get-sha
+        id: getsha
         if: always()
         run: |
           sha='${{ github.sha }}'
@@ -64,11 +64,11 @@ jobs:
             sha='${{ github.event.workflow_run.event.push.after}}'
           fi
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
-      - name: Set Status Check for ${{ steps.get-sha.outputs.sha }}
+      - name: Set Status Check for ${{ steps.getsha.outputs.sha }}
         uses: LouisBrunner/checks-action@c6dbaea4f9c79ccfe67c038acddaf713518b255d
         if: always()
         with:
-          sha: ${{ steps.get-sha.outputs.sha }}
+          sha: ${{ steps.getsha.outputs.sha }}
           token: ${{ secrets.GITHUB_TOKEN }}
           name: ${{ env.check_name }}
           conclusion: ${{ job.status }}
@@ -115,7 +115,7 @@ jobs:
           name: linux-outputs
           path: output
       - name: get sha
-        id: get-sha
+        id: getsha
         if: always()
         run: |
           sha='${{ github.sha }}'
@@ -125,11 +125,12 @@ jobs:
             sha='${{ github.event.workflow_run.event.push.after}}'
           fi
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
-      - name: Set Status Check for ${{ steps.get-sha.outputs.sha }}
+          echo "using $sha"
+      - name: Set Status Check for ${{ steps.getsha.outputs.sha }}
         uses: LouisBrunner/checks-action@c6dbaea4f9c79ccfe67c038acddaf713518b255d
         if: always()
         with:
-          sha: ${{ steps.get-sha.outputs.sha }}
+          sha: ${{ steps.getsha.outputs.sha }}
           token: ${{ secrets.GITHUB_TOKEN }}
           name: ${{ env.check_name }}
           conclusion: ${{ job.status }}
@@ -173,7 +174,7 @@ jobs:
           name: windows-outputs
           path: output
       - name: get sha
-        id: get-sha
+        id: getsha
         if: always()
         run: |
           sha='${{ github.sha }}'
@@ -183,11 +184,11 @@ jobs:
             sha='${{ github.event.workflow_run.event.push.after}}'
           fi
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
-      - name: Set Status Check for ${{ steps.get-sha.outputs.sha }}
+      - name: Set Status Check for ${{ steps.getsha.outputs.sha }}
         uses: LouisBrunner/checks-action@c6dbaea4f9c79ccfe67c038acddaf713518b255d
         if: always()
         with:
-          sha: ${{ steps.get-sha.outputs.sha }}
+          sha: ${{ steps.getsha.outputs.sha }}
           token: ${{ secrets.GITHUB_TOKEN }}
           name: ${{ env.check_name }}
           conclusion: ${{ job.status }}
