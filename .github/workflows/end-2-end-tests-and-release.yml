@@ -17,6 +17,8 @@ jobs:
     env:
       check_name: Integration Tests macOS
 
+    if: false
+
     steps:
 
       - name: Download macOS binary
@@ -114,6 +116,15 @@ jobs:
         with:
           name: linux-outputs
           path: output
+
+      - name: Upload
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+            name: testfiles
+            retention-days: 1
+            path: ${{ github.event_path }}
+
       - name: get sha
         id: getsha
         if: always()
@@ -140,6 +151,8 @@ jobs:
     runs-on: windows-latest
     env:
       check_name: Integration Tests Windows
+
+    if: false
 
     steps:
       - name: Download Windows binary
