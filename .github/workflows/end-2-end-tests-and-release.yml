@@ -55,22 +55,11 @@ jobs:
         with:
           name: macos-outputs
           path: output
-      - name: get sha
-        id: getsha
-        if: always()
-        run: |
-          sha='${{ github.sha }}'
-          if [ '${{ github.event.workflow_run.event }}' = 'pull_request' ]; then
-            sha='${{ github.event.workflow_run.event.pull_request.head.sha}}'
-          else
-            sha='${{ github.event.workflow_run.event.push.after}}'
-          fi
-          echo "sha=$sha" >> "$GITHUB_OUTPUT"
-      - name: Set Status Check for ${{ steps.getsha.outputs.sha }}
+      - name: Set Status Check
         uses: LouisBrunner/checks-action@c6dbaea4f9c79ccfe67c038acddaf713518b255d
         if: always()
         with:
-          sha: ${{ steps.getsha.outputs.sha }}
+          sha: ${{ github.event.workflow_run.head_sha}}
           token: ${{ secrets.GITHUB_TOKEN }}
           name: ${{ env.check_name }}
           conclusion: ${{ job.status }}
@@ -125,23 +114,11 @@ jobs:
             retention-days: 1
             path: ${{ github.event_path }}
 
-      - name: get sha
-        id: getsha
-        if: always()
-        run: |
-          sha='${{ github.sha }}'
-          if [ '${{ github.event.workflow_run.event }}' = 'pull_request' ]; then
-            sha='${{ github.event.workflow_run.head_sha}}'
-          else
-            sha='${{ github.event.workflow_run.head_sha}}'
-          fi
-          echo "sha=$sha" >> "$GITHUB_OUTPUT"
-          echo "using $sha"
-      - name: Set Status Check for ${{ steps.getsha.outputs.sha }}
+      - name: Set Status Check
         uses: LouisBrunner/checks-action@c6dbaea4f9c79ccfe67c038acddaf713518b255d
         if: always()
         with:
-          sha: ${{ steps.getsha.outputs.sha }}
+          sha: ${{ github.event.workflow_run.head_sha}}
           token: ${{ secrets.GITHUB_TOKEN }}
           name: ${{ env.check_name }}
           conclusion: ${{ job.status }}
@@ -186,22 +163,11 @@ jobs:
         with:
           name: windows-outputs
           path: output
-      - name: get sha
-        id: getsha
-        if: always()
-        run: |
-          sha='${{ github.sha }}'
-          if [ '${{ github.event.workflow_run.event }}' = 'pull_request' ]; then
-            sha='${{ github.event.workflow_run.event.pull_request.head.sha}}'
-          else
-            sha='${{ github.event.workflow_run.event.push.after}}'
-          fi
-          echo "sha=$sha" >> "$GITHUB_OUTPUT"
-      - name: Set Status Check for ${{ steps.getsha.outputs.sha }}
+      - name: Set Status Check
         uses: LouisBrunner/checks-action@c6dbaea4f9c79ccfe67c038acddaf713518b255d
         if: always()
         with:
-          sha: ${{ steps.getsha.outputs.sha }}
+          sha: ${{ github.event.workflow_run.head_sha}}
           token: ${{ secrets.GITHUB_TOKEN }}
           name: ${{ env.check_name }}
           conclusion: ${{ job.status }}
