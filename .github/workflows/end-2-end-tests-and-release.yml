@@ -55,7 +55,7 @@ jobs:
         with:
           name: macos-outputs
           path: output
-      - name: get sha
+      - name: Get SHA
         id: getsha
         if: always()
         run: |
@@ -125,7 +125,7 @@ jobs:
             retention-days: 1
             path: ${{ github.event_path }}
 
-      - name: get sha
+      - name: Get SHA
         id: getsha
         if: always()
         run: |
@@ -186,7 +186,7 @@ jobs:
         with:
           name: windows-outputs
           path: output
-      - name: get sha
+      - name: Get SHA
         id: getsha
         if: always()
         run: |
