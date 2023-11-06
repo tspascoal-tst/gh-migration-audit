@@ -55,6 +55,7 @@ jobs:
           path: output
       - name: get sha
         id: get-sha
+        if: always()
         run: |
           sha='${{ github.sha }}'
           if [ '${{ github.event.workflow_run.event }}' = 'pull_request' ]; then
