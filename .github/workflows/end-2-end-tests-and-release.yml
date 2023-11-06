@@ -121,7 +121,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-            name: testfiles
+            name: dbg
             retention-days: 1
             path: ${{ github.event_path }}
 
@@ -131,9 +131,9 @@ jobs:
         run: |
           sha='${{ github.sha }}'
           if [ '${{ github.event.workflow_run.event }}' = 'pull_request' ]; then
-            sha='${{ github.event.workflow_run.event.pull_request.head.sha}}'
+            sha='${{ github.event.workflow_run.head_sha}}'
           else
-            sha='${{ github.event.workflow_run.event.push.after}}'
+            sha='${{ github.event.workflow_run.head_sha}}'
           fi
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
           echo "using $sha"
