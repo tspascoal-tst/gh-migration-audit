@@ -93,7 +93,7 @@ command
         void logRateLimitInformation(logger, octokit);
       }, 30_000);
 
-      logger.info(`Auditing ${owner}/${repo}...`);
+      logger.info(`Auditing FROM PR ${owner}/${repo}...`);
 
       const warnings = await auditRepository({ octokit, owner, repo, logger });
       await writeWarningsToCsv(warnings, outputPath);
