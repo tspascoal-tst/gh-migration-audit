@@ -63,7 +63,7 @@ jobs:
           else
             sha='${{ github.event.workflow_run.event.push.after}}'
           fi
-          echo -n "$sha" >> "$GITHUB_OUTPUT"
+          echo -n "sha=$sha" >> "$GITHUB_OUTPUT"
       - name: Set Status Check for ${{ steps.get-sha.outputs.sha }}
         uses: LouisBrunner/checks-action@c6dbaea4f9c79ccfe67c038acddaf713518b255d
         if: always()
@@ -124,7 +124,7 @@ jobs:
           else
             sha='${{ github.event.workflow_run.event.push.after}}'
           fi
-          echo -n "$sha" >> "$GITHUB_OUTPUT"
+          echo -n "sha=$sha" >> "$GITHUB_OUTPUT"
       - name: Set Status Check for ${{ steps.get-sha.outputs.sha }}
         uses: LouisBrunner/checks-action@c6dbaea4f9c79ccfe67c038acddaf713518b255d
         if: always()
@@ -182,7 +182,7 @@ jobs:
           else
             sha='${{ github.event.workflow_run.event.push.after}}'
           fi
-          echo -n "$sha" >> "$GITHUB_OUTPUT"
+          echo -n "sha=$sha" >> "$GITHUB_OUTPUT"
       - name: Set Status Check for ${{ steps.get-sha.outputs.sha }}
         uses: LouisBrunner/checks-action@c6dbaea4f9c79ccfe67c038acddaf713518b255d
         if: always()
