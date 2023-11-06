@@ -64,7 +64,7 @@ jobs:
             sha='${{ github.event.workflow_run.event.push.after}}'
           fi
           echo -n "$sha" >> SHA
-      - name: Set Status Check
+      - name: Set Status Check for ${{ steps.get-sha.outputs.sha }}
         uses: LouisBrunner/checks-action@c6dbaea4f9c79ccfe67c038acddaf713518b255d
         if: always()
         with:
@@ -114,6 +114,25 @@ jobs:
         with:
           name: linux-outputs
           path: output
+      - name: get sha
+        id: get-sha
+        if: always()
+        run: |
+          sha='${{ github.sha }}'
+          if [ '${{ github.event.workflow_run.event }}' = 'pull_request' ]; then
+            sha='${{ github.event.workflow_run.event.pull_request.head.sha}}'
+          else
+            sha='${{ github.event.workflow_run.event.push.after}}'
+          fi
+          echo -n "$sha" >> SHA
+      - name: Set Status Check for ${{ steps.get-sha.outputs.sha }}
+        uses: LouisBrunner/checks-action@c6dbaea4f9c79ccfe67c038acddaf713518b255d
+        if: always()
+        with:
+          sha: ${{ steps.get-sha.outputs.sha }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ env.check_name }}
+          conclusion: ${{ job.status }}
 
   end_to_end_tests_windows:
     name: Run end to end tests (Windows)
@@ -153,4 +172,22 @@ jobs:
         with:
           name: windows-outputs
           path: output
-
+      - name: get sha
+        id: get-sha
+        if: always()
+        run: |
+          sha='${{ github.sha }}'
+          if [ '${{ github.event.workflow_run.event }}' = 'pull_request' ]; then
+            sha='${{ github.event.workflow_run.event.pull_request.head.sha}}'
+          else
+            sha='${{ github.event.workflow_run.event.push.after}}'
+          fi
+          echo -n "$sha" >> SHA
+      - name: Set Status Check for ${{ steps.get-sha.outputs.sha }}
+        uses: LouisBrunner/checks-action@c6dbaea4f9c79ccfe67c038acddaf713518b255d
+        if: always()
+        with:
+          sha: ${{ steps.get-sha.outputs.sha }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ env.check_name }}
+          conclusion: ${{ job.status }}
